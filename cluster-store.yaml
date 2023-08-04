@@ -1,0 +1,15 @@
+#  cluster-store.yaml 
+apiVersion: external-secrets.io/v1beta1
+kind: ClusterSecretStore #Kubernetes resource type
+metadata:
+  name: vault-backend #resource name
+spec:
+  provider:
+    vault: #specifies vault as the provider
+      server: "http://104.198.215.100:8200/" #the address of your vault instance
+      path: "data" #path for accessing the secrets
+      version: "v1" #Vault API version
+      auth:
+        tokenSecretRef:
+          name: "vault-token" #Use a secret called vault-token
+          key: "token" #Use this key to access the vault token
